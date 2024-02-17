@@ -7,7 +7,6 @@ from contextlib import contextmanager
 from src import config
 from src.models import models
 
-
 router = APIRouter(
     prefix="/api",
     tags=['Health Check']
@@ -19,6 +18,7 @@ async def health_check():
     """
     Verify the health of services.
     """
+
     class UserRepository:
         @staticmethod
         @contextmanager
@@ -38,6 +38,7 @@ async def health_check():
                 return e
 
     return test()
+
 
 @router.get("/sentry-debug", status_code=status.HTTP_200_OK)
 async def trigger_error():

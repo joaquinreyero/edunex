@@ -1,2 +1,7 @@
 **/__pycache__/
-
+venv
+.excalidraw
+docker-compose.yml
+.env
+.github
+.github/

@@ -13,7 +13,10 @@ from src.models.models import Base
 
 class Settings:
     def __init__(self):
-        self.DATABASE_URI = os.getenv("DATABASE_URI_LOCAL")
+        if os.getenv("ENV") == "local":
+            self.DATABASE_URI = os.getenv("DATABASE_URI_LOCAL")
+        else:
+            self.DATABASE_URI = os.getenv("DATABASE_URI")
         self.DSN_SENTRY = os.getenv("DSN_SENTRY")
 
 

@@ -51,7 +51,7 @@ jobs:
 
       - name: Deploy On Google Cloud
         run: |
-          gcloud run deploy users \
+          gcloud run deploy backend \
             --image gcr.io/${{ secrets.PROJECT_ID }}/backend:${{ steps.tag.outputs.tag }} \
             --platform managed \
             --region us-east1 \

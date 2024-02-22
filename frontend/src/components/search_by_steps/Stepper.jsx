@@ -4,6 +4,8 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import { StepperContext } from '../../context/StepperContext';
 
 import SearchComboBox from './SearchComboBox';
 
@@ -12,6 +14,7 @@ const steps = ['Universidad', 'Carrera', 'Materia'];
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const { setStepper } = React.useContext(StepperContext);
 
   const isStepOptional = (step) => {
     return step === 1 || step === 2;
@@ -28,8 +31,12 @@ export default function HorizontalLinearStepper() {
       newSkipped.delete(activeStep);
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    if (activeStep === steps.length - 1) {
+      window.location.href = '/tutorings';
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setSkipped(newSkipped);
+    }
   };
 
   const handleBack = () => {
@@ -84,9 +91,11 @@ export default function HorizontalLinearStepper() {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Omitir
-              </Button>
+              <Link to="/tutorings" style={{ textDecoration: 'none' }}>
+                <Button color="inherit" sx={{ mr: 1 }}>
+                  Omitir
+                </Button>
+              </Link>
             )}
 
             <Button onClick={handleNext}>
@@ -95,9 +104,7 @@ export default function HorizontalLinearStepper() {
           </Box>
         </React.Fragment>
       )}
-
       <SearchComboBox activeStep={activeStep} />
-
     </Box>
   );
 }

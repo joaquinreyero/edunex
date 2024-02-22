@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Stepper from './Stepper'
-
+import StepperProvider from '../../context/StepperProvider'
 
 const SearchBox = () => {
   return (
-    <div>
+    <StepperProvider>
         <Stepper />
-    </div>
+    </StepperProvider>
   )
 }
 

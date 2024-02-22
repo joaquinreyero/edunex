@@ -43,12 +43,15 @@ class SubjectRepository:
         db = configure_database()
         try:
             subject = db.query(models.Subject).filter(models.Subject.id == subject_id).first()
-            db.delete(subject)
-            db.commit()
-            return subject
+            if subject:
+                db.delete(subject)
+                db.commit()
+                return subject
+            else:
+                raise errors.DatabaseError("Subject not found with id: {}".format(subject_id))
         except SQLAlchemyError as e:
             db.rollback()
-            raise errors.DatabaseError("An error occurred while deleting the subject.")
+            raise errors.DatabaseError("An error occurred while deleting the subject: {}".format(str(e)))
 
     @staticmethod
     def update(subject: schema.Create, subject_id: int):

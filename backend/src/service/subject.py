@@ -37,7 +37,7 @@ def delete(subject_id: int):
     """
     try:
         subject = repository.SubjectRepository.delete(subject_id)
-        return schema.Get(id=subject.id, university_id=subject.university_id, name=subject.name, year=subject.year)
+        return schema.Get(id=subject.id, degree_id=subject.degree_id, name=subject.name, year=subject.year)
     except errors.DatabaseError:
         raise errors.InternalServerError("An error occurred while deleting a subject.")
     except Exception:

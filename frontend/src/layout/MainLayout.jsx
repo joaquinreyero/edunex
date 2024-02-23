@@ -1,16 +1,14 @@
 import React from 'react';
-import Header from '../components/Header';
-import { Box } from '@mui/material';
-import { Padding } from '@mui/icons-material';
-
+import Navbar from '../components/navbar/Navbar';
+import Footer from '../components/footer/Footer'
 export const MainLayout = ({ children }) => {
   return (
-    <div>
-      <Header />
-      <Box sx={{
-        padding: '5px 1rem 1rem 1rem'
-      }}/>
-      {children}
+    <div class='bg-gradient-to-r from-blue-950 to-blue-900 backdrop-blur-md  font-sans'>
+      <Navbar />
+      <div className='mx-auto max-w-screen-2xl'>
+        {children}
+      </div>
+      <Footer />
     </div>
   );
 };
